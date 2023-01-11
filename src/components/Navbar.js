@@ -8,7 +8,6 @@ import {
 
 export default class Navbar extends Component {
 
-
   render() {
     return (
         <nav className={`navbar navbar-expand-lg bg-${this.props.mode}`}>
@@ -46,13 +45,6 @@ export default class Navbar extends Component {
                 <Link className={`nav-link text-${this.props.mode === "dark"?"light":"dark"}`} to="/science">Science</Link>
               </li>
               </ul>
-
-              <select className="form-select-sm mx-3" aria-label="Default select example">
-                <option selected>Choose your country</option>
-                <option value="1" to="/india">India</option>
-                <option value="2">America</option>
-                <option value="3">Britain</option>
-              </select>
 
               <div className="form-check form-switch mx-2">
         <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onClick={this.props.toggleMode}/>
