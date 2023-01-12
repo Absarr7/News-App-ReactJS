@@ -11,7 +11,7 @@ export class NewsItem extends Component {
             <div className="card" style={{"width": "21rem", "height": "480px"}}>
                 <img src={ImageURL} style={{"height": "180px"}} className="card-img-top" alt="..."/>
                     <div className="card-body">
-                    <span class="badge rounded-pill text-bg-warning fw-semi-bold my-1">{source}</span>
+                    <span className="badge rounded-pill text-bg-warning fw-semi-bold my-1">{source}</span>
                         <h5 className="card-title">{title}...</h5>
                         <p className="card-text">{description}...</p>
                         <p className="card-text "><small className='text-muted'  style={{"position":"absolute", "top": "82%"} }>By {author} on {new Date(date).toDateString()}</small></p>

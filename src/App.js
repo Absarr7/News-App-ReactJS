@@ -1,5 +1,4 @@
 import "./App.css";
-import { Helmet } from 'react-helmet';
 import React, { Component } from "react";
 import Navbar from "./components/Navbar";
 import News from "./components/News";
@@ -26,7 +25,7 @@ export default class App extends Component {
       document.body.style.backgroundColor = "#121212";
     } else if (this.state.mode === "dark") {
       this.setState({ mode: "light" });
-      document.body.style.backgroundColor = "white";
+      document.body.style.backgroundColor = "#FBFFFF";
     }
   };
 
@@ -36,7 +35,7 @@ export default class App extends Component {
     return (
       <div>
         <BrowserRouter>
-          <Navbar toggleMode={this.toggleMode} mode={this.state.mode} />
+      <Navbar toggleMode={this.toggleMode} mode={this.state.mode} />
           <Routes>
             <Route
               exact
@@ -133,22 +132,7 @@ export default class App extends Component {
                   country={this.state.country}
                   category="science"
                 />
-              }
-            ></Route>
-            <Route
-              exact
-              path="/india"
-              element={
-                <News
-                  key="in"
-                  toggleMode={this.toggleMode}
-                  mode={this.state.mode}
-                  pageSize={this.pageSize}
-                  country="in"
-                  category="general"
-                />
-              }
-            ></Route>
+              }></Route>
           </Routes>
         </BrowserRouter>
       </div>
