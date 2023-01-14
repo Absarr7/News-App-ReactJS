@@ -46,10 +46,16 @@ export default class Navbar extends Component {
               </li>
               </ul>
 
+              <form class="d-flex" onSubmit={this.props.handleSubmit}>
+          <input class="form-control me-2" type="search" placeholder="Search" value={this.props.search} onChange={e => this.props.updateSearchValue(e)}/>
+          <button class="btn btn-outline-success" type="submit" onClick={this.props.onBtnSubmit}></button>
+
+      </form>
+
               <div className="form-check form-switch mx-2">
-        <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onClick={this.props.toggleMode}/>
-        <label className={`form-check-label text-${this.props.mode === "dark"?"light":"dark"}`} htmlFor="flexSwitchCheckDefault">Dark mode</label>
-      </div>
+                <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onClick={this.props.toggleMode}/>
+                <label className={`form-check-label text-${this.props.mode === "dark"?"light":"dark"}`} htmlFor="flexSwitchCheckDefault">Dark mode</label>
+              </div>
           </div>
         </div>
       </nav>

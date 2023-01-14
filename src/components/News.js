@@ -34,16 +34,20 @@ export class news extends Component {
   }
 
   async updateNews() {
-    const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&apiKey=245f49689f7e4dd2bc78159bed8e1091&pageSize=${this.props.pageSize}&category=${this.props.category}&page=${this.state.page}`;
+    this.props.setProgress(5)
+    const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&apiKey=245f49689f7e4dd2bc78159bed8e1091&pageSize=${this.props.pageSize}&category=${this.props.category}&page=${this.state.page}&q=${this.props.search}`;
     this.setState({ loading: true });
     let data = await fetch(url);
+    this.props.setProgress(30)
     let parsedData = await data.json();
+    this.props.setProgress(70)
     console.log(parsedData);
-    this.setState({ loading: false });
     this.setState({
       articles: parsedData.articles,
       totalResults: parsedData.totalResults,
+      loading: false
     });
+    this.props.setProgress(100)
   }
 
   async componentDidMount() {
@@ -51,7 +55,7 @@ export class news extends Component {
   }
 
   fetchMoreData = async ()=>{
-    const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&apiKey=245f49689f7e4dd2bc78159bed8e1091&pageSize=${this.props.pageSize}&category=${this.props.category}&page=${this.state.page + 1}`;
+    const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&apiKey=245f49689f7e4dd2bc78159bed8e1091&pageSize=${this.props.pageSize}&category=${this.props.category}&page=${this.state.page + 1}&q=${this.props.search}`;
     this.setState({page: this.state.page + 1});
     this.setState({ loading: true });
     let data = await fetch(url);
@@ -71,7 +75,7 @@ export class news extends Component {
             className={`text-${this.props.mode === "dark" ? "light" : "dark"
               } text-center my-4`}
           >
-            Top headlines - see what's really happening in {this.props.category}
+            Top headlines in {this.props.category}
             .
           </h3>
           
