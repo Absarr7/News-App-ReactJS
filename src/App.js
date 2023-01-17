@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { Component } from "react";
+import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import News from "./components/News";
 import LoadingBar from 'react-top-loading-bar'
@@ -10,62 +10,58 @@ import {
   Routes,
 } from "react-router-dom";
 
-export default class App extends Component {
+const App = (props)=> {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      mode: "light",
-      country: "in",
-      Progress: 0,
-      search: ''
-    };
-  }
-  
-  pageSize = 12;
-  
+  const [mode, setMode] = useState("light");
+  const [country, setCountry] = useState("in");
+  let [progress, setprogress] = useState(0);
+  const [search, setSearch] = useState('');
+  const [finalSearch, setFinalSearch] = useState('')
 
-  toggleMode = () => {
-    console.log(this.state.mode);
-    if (this.state.mode === "light") {
-      this.setState({ mode: "dark" });
+
+  
+  const pageSize = 12;
+  
+  const toggleMode = () => {
+    console.log(mode);
+    if (mode === "light") {
+      setMode("dark")
       document.body.style.backgroundColor = "#121212";
-    } else if (this.state.mode === "dark") {
-      this.setState({ mode: "light" });
+    } else if (mode === "dark") {
+      setMode("light");
       document.body.style.backgroundColor = "#FBFFFF";
     }
   };
 
 
   // set the progress function..
-  setProgress = (progress)=>{
-    this.setState({Progress: progress})
+  const setProgress = (progress)=>{
+    setprogress(progress)
   }
 
-  handleSubmit = (event)=>{
+  const handleSubmit = (event)=>{
     event.preventDefault();
   }
   
-  updateSearchValue = (event)=>{
+  const updateSearchValue = (event)=>{
     const value = event.target.value;
-    this.setState({search: value});
-    console.log(this.state.search);
-    }
+    setSearch(value)
+
   }
 
-  onBtnSubmit = ()=>{
-    
-  }
+  const FinalSearch = ()=>{
+    const finalSearch = search;
+    setFinalSearch(finalSearch)
+    console.log(finalSearch);
+  };
 
-
-  render() {
     return (
       <div>
         <BrowserRouter>
-      <Navbar toggleMode={this.toggleMode} mode={this.state.mode} search={this.search} updateSearchValue={this.updateSearchValue} handleSubmit={this.handleSubmit}/>
+      <Navbar toggleMode={toggleMode} mode={mode} search={search} updateSearchValue={updateSearchValue} handleSubmit={handleSubmit}/>
        <LoadingBar
         color='#ffc107'
-        progress={this.state.Progress}
+        progress={progress}
         height= {3}
         shadow= {false}
         // onLoaderFinished={console.log("hello")}
@@ -76,14 +72,15 @@ export default class App extends Component {
               path="/"
               element={
                 <News 
-                  search={this.state.search}
-                  setProgress={this.setProgress}
-                  toggleMode={this.toggleMode}
-                  ApiKey={this.apiKey}
-                  mode={this.state.mode}
-                  pageSize={this.pageSize}
-                  country={this.state.country}
+                  search={finalSearch}
+                  setProgress={setProgress}
+                  toggleMode={toggleMode}
+                  
+                  mode={mode}
+                  pageSize={pageSize}
+                  country={country}
                   category="general"
+                  
                 />
               }
             ></Route>
@@ -92,14 +89,14 @@ export default class App extends Component {
               path="/technology"
               element={
                 <News 
-                  search={this.state.search}
-                  setProgress={this.setProgress}
+                  search={finalSearch}
+                  setProgress={setProgress}
                   key="technology"
-                  toggleMode={this.toggleMode}
-                  ApiKey={this.apiKey}
-                  mode={this.state.mode}
-                  pageSize={this.pageSize}
-                  country={this.state.country}
+                  toggleMode={toggleMode}
+                  
+                  mode={mode}
+                  pageSize={pageSize}
+                  country={country}
                   category="technology"
                 />
               }
@@ -109,14 +106,14 @@ export default class App extends Component {
               path="/sports"
               element={
                 <News
-                  search={this.state.search}
-                  setProgress={this.setProgress}
+                  search={finalSearch}
+                  setProgress={setProgress}
                   key="sports"
-                  toggleMode={this.toggleMode}
-                  ApiKey={this.apiKey}
-                  mode={this.state.mode}
-                  pageSize={this.pageSize}
-                  country={this.state.country}
+                  toggleMode={toggleMode}
+                  
+                  mode={mode}
+                  pageSize={pageSize}
+                  country={country}
                   category="sports"
                 />
               }
@@ -126,14 +123,14 @@ export default class App extends Component {
               path="/entertainment"
               element={
                 <News
-                  search={this.state.search}
-                  setProgress={this.setProgress}
+                  search={finalSearch}
+                  setProgress={setProgress}
                   key="entertainment"
-                  toggleMode={this.toggleMode}
-                  ApiKey={this.apiKey}
-                  mode={this.state.mode}
-                  pageSize={this.pageSize}
-                  country={this.state.country}
+                  toggleMode={toggleMode}
+                  
+                  mode={mode}
+                  pageSize={pageSize}
+                  country={country}
                   category="entertainment"
                 />
               }
@@ -143,14 +140,14 @@ export default class App extends Component {
               path="/business"
               element={
                 <News
-                  search={this.state.search}
-                  setProgress={this.setProgress}
+                  search={finalSearch}
+                  setProgress={setProgress}
                   key="business"
-                  toggleMode={this.toggleMode}
-                  ApiKey={this.apiKey}
-                  mode={this.state.mode}
-                  pageSize={this.pageSize}
-                  country={this.state.country}
+                  toggleMode={toggleMode}
+                  
+                  mode={mode}
+                  pageSize={pageSize}
+                  country={country}
                   category="business"
                 />
               }
@@ -160,14 +157,14 @@ export default class App extends Component {
               path="/health"
               element={
                 <News
-                  search={this.state.search}
-                  setProgress={this.setProgress}
+                  search={finalSearch}
+                  setProgress={setProgress}
                   key="health"
-                  toggleMode={this.toggleMode}
-                  ApiKey={this.apiKey}
-                  mode={this.state.mode}
-                  pageSize={this.pageSize}
-                  country={this.state.country}
+                  toggleMode={toggleMode}
+                  
+                  mode={mode}
+                  pageSize={pageSize}
+                  country={country}
                   category="health"
                 />
               }
@@ -177,14 +174,14 @@ export default class App extends Component {
               path="/science"
               element={
                 <News
-                  search={this.state.search}
-                  setProgress={this.setProgress}
+                  search={finalSearch}
+                  setProgress={setProgress}
                   key="science"
-                  toggleMode={this.toggleMode}
-                  ApiKey={this.apiKey}
-                  mode={this.state.mode}
-                  pageSize={this.pageSize}
-                  country={this.state.country}
+                  toggleMode={toggleMode}
+                  
+                  mode={mode}
+                  pageSize={pageSize}
+                  country={country}
                   category="science"
                 />
               }></Route>
@@ -192,5 +189,5 @@ export default class App extends Component {
         </BrowserRouter>
       </div>
     );
-  }
-}
+  };
+export default App;
