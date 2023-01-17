@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 const Navbar = (props)=>{
     return (
       <div>
-        <nav className={`navbar navbar-expand-lg bg-${props.mode}`}>
+        <nav className={`navbar navbar-expand-lg bg-${props.mode} fixed-top`}>
         <div className="container-fluid">
           <Link className={`navbar-brand font-weight-bold text-${props.mode === "dark"?"light":"dark"}`} to="/">The Faithful Rumours</Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,12 +41,6 @@ const Navbar = (props)=>{
                 <Link className={`nav-link text-${props.mode === "dark"?"light":"dark"}`} to="/science">Science</Link>
               </li>
               </ul>
-
-              <form className="d-flex" onSubmit={props.handleSubmit}>
-          <input className="form-control me-2" type="search" placeholder="Search" value={props.search} onChange={e => props.updateSearchValue(e)}/>
-          <button className="btn btn-outline-success" type="submit" onClick={OnSearchQuery}>Search</button>
-
-      </form>
 
               <div className="form-check form-switch mx-2">
                 <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onClick={props.toggleMode}/>

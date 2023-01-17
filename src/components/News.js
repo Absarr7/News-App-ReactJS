@@ -10,8 +10,7 @@ const News = (props)=> {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [totalResults, setTotalResults] = useState(0);
-  
-  // document.title = `Faithful Rumours | ${capitalizeFirstLetter(props.category)}`;
+
 
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -34,12 +33,13 @@ const News = (props)=> {
 
   useEffect(() => {
     updateNews();
+    document.title = `Faithful Rumours | ${capitalizeFirstLetter(props.category)}`;
   }, [])
 
 
   const fetchMoreData = async ()=>{
     const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&apiKey=245f49689f7e4dd2bc78159bed8e1091&pageSize=${props.pageSize}&category=${props.category}&page=${page + 1}&q=`;
-    this.setState({page: page + 1});
+    setPage(page + 1);
     setLoading(true);
     let data = await fetch(url);
     let parsedData = await data.json();
@@ -49,28 +49,13 @@ const News = (props)=> {
     setLoading(false);
   };
 
-  const OnSearchQuery = async ()=>{
-    props.setProgress(5)
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&apiKey=245f49689f7e4dd2bc78159bed8e1091&pageSize=${props.pageSize}&category=${props.category}&page=${page}&q=${props.search}`;
-    setLoading(true);
-    let data = await fetch(url);
-    props.setProgress(30)
-    let parsedData = await data.json();
-    props.setProgress(70)
-    console.log(parsedData);
-    setArticles(articles.concat(parsedData.articles));
-    setTotalResults(parsedData.totalResults);
-    setLoading(false);
-    props.setProgress(100)
-  };
 
     return (
       <>
           <h3
-            className={`text-${props.mode === "dark" ? "light" : "dark"
-              } text-center my-4`}
+            className={`text-${props.mode === "dark" ? "light" : "dark"} text-center`} style={{'marginTop': '100px', "fontSize": '2.1rem', 'fontWeight': '600'}}
           >
-            Top headlines in {props.category}
+            top Headlines in {props.category}
             .
           </h3>
           
@@ -99,7 +84,7 @@ const News = (props)=> {
                       author={
                         !element.author
                           ? "unknown"
-                          : element.author
+                          : element.author.slice(0, 20)
                       }
                       date={
                         element.publishedAt

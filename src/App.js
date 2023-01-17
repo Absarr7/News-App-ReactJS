@@ -23,7 +23,6 @@ const App = (props)=> {
   const pageSize = 12;
   
   const toggleMode = () => {
-    console.log(mode);
     if (mode === "light") {
       setMode("dark")
       document.body.style.backgroundColor = "#121212";
@@ -39,26 +38,10 @@ const App = (props)=> {
     setprogress(progress)
   }
 
-  const handleSubmit = (event)=>{
-    event.preventDefault();
-  }
-  
-  const updateSearchValue = (event)=>{
-    const value = event.target.value;
-    setSearch(value)
-
-  }
-
-  const FinalSearch = ()=>{
-    const finalSearch = search;
-    setFinalSearch(finalSearch)
-    console.log(finalSearch);
-  };
-
     return (
       <div>
         <BrowserRouter>
-      <Navbar toggleMode={toggleMode} mode={mode} search={search} updateSearchValue={updateSearchValue} handleSubmit={handleSubmit}/>
+      <Navbar toggleMode={toggleMode} mode={mode}/>
        <LoadingBar
         color='#ffc107'
         progress={progress}
@@ -72,10 +55,8 @@ const App = (props)=> {
               path="/"
               element={
                 <News 
-                  search={finalSearch}
                   setProgress={setProgress}
                   toggleMode={toggleMode}
-                  
                   mode={mode}
                   pageSize={pageSize}
                   country={country}
@@ -89,11 +70,9 @@ const App = (props)=> {
               path="/technology"
               element={
                 <News 
-                  search={finalSearch}
                   setProgress={setProgress}
                   key="technology"
                   toggleMode={toggleMode}
-                  
                   mode={mode}
                   pageSize={pageSize}
                   country={country}
@@ -106,11 +85,9 @@ const App = (props)=> {
               path="/sports"
               element={
                 <News
-                  search={finalSearch}
                   setProgress={setProgress}
                   key="sports"
                   toggleMode={toggleMode}
-                  
                   mode={mode}
                   pageSize={pageSize}
                   country={country}
@@ -123,11 +100,9 @@ const App = (props)=> {
               path="/entertainment"
               element={
                 <News
-                  search={finalSearch}
                   setProgress={setProgress}
                   key="entertainment"
                   toggleMode={toggleMode}
-                  
                   mode={mode}
                   pageSize={pageSize}
                   country={country}
@@ -140,11 +115,9 @@ const App = (props)=> {
               path="/business"
               element={
                 <News
-                  search={finalSearch}
                   setProgress={setProgress}
                   key="business"
                   toggleMode={toggleMode}
-                  
                   mode={mode}
                   pageSize={pageSize}
                   country={country}
@@ -157,11 +130,9 @@ const App = (props)=> {
               path="/health"
               element={
                 <News
-                  search={finalSearch}
                   setProgress={setProgress}
                   key="health"
                   toggleMode={toggleMode}
-                  
                   mode={mode}
                   pageSize={pageSize}
                   country={country}
@@ -174,11 +145,9 @@ const App = (props)=> {
               path="/science"
               element={
                 <News
-                  search={finalSearch}
                   setProgress={setProgress}
                   key="science"
                   toggleMode={toggleMode}
-                  
                   mode={mode}
                   pageSize={pageSize}
                   country={country}
